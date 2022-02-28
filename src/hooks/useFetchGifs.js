@@ -1,0 +1,21 @@
+import { useEffect, useState } from "react";
+import { getGifs } from "../helpers/getGifs.js";
+
+export const useFetchGifs = (category) => {
+  const [state, setState] = useState({
+    data: [],
+    loading: true,
+  });
+
+  //efectos no pueden ser async
+  useEffect(() => {
+    getGifs(category).then((img) => {
+      setState({
+        data: img,
+        loading: false,
+      });
+    });
+  }, [category]);
+
+  return state;
+};
